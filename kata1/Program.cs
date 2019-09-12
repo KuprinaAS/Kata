@@ -138,6 +138,37 @@ namespace kata1
             }
             return str;
         }
+        /// <summary>
+        /// Equal Sides Of An Array:
+        /// You are going to be given an array of integers.
+        /// Your job is to take that array and find an index N where the sum of the integers
+        /// to the left of N is equal to the sum of the integers to the right of N.
+        /// If there is no index that would make this happen, return -1.
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static int EqualSides(int[] num)
+        {
+            int n = -1, suml = 0, sumr, k = 1;
+            for (int i = 0; i < num.Length; i++)
+            {
+                sumr = 0;
+                for (int j = k; j < num.Length; j ++)
+                {
+                    sumr += num[j];
+                }
+                if (suml == sumr)
+                {
+                    return i;
+                }
+                else
+                {
+                    k++;
+                    suml += num[i];
+                }
+            }
+            return n;
+        }
         static void Main(string[] args)
         {
             //---Highest and Lowest
@@ -153,10 +184,9 @@ namespace kata1
             {
                 Console.Write(res[i] + " ");
             }
-            Console.WriteLine();
 
             //---Isograms
-            Console.WriteLine("Isogram? " + IsIsogram(str));
+            Console.WriteLine("\nIsogram? " + IsIsogram(str));
             
             //---Reverse words
             Console.WriteLine("Введите строку:");
@@ -190,7 +220,18 @@ namespace kata1
             {
                 Console.Write(result[k] + " ");
             }
-            Console.WriteLine();
+
+            //---Equal Sides Of An Array
+            Console.WriteLine("\n Введите количество чисел в массиве: ");
+            n = Convert.ToInt32(Console.ReadLine());
+            int[] numbers = new int[n]; // { 10, -80, 10, 10, 15, 35, 20 };
+            for (int i = 0; i < n; i++)
+            {
+                Random ran = new Random();
+                numbers[i] = ran.Next(-100, 100);
+                Console.Write(numbers[i] + " ");
+            }
+            Console.WriteLine("\n" + EqualSides(numbers));
         }
     }
 }
